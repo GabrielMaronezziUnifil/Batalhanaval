@@ -1,0 +1,351 @@
+import java.util.Scanner;
+
+public class batalhanaval {
+
+    public static int opcao = 0;
+    public  static  int acertos = 0;
+    public static void main(String[] args) {
+        int tentativas = 10;
+
+        int tabuleiro[][] = new int[7][7];
+        int SombraDoTabuleiro[][] = new int[7][7];
+        int tiro[] = new int[2];
+
+
+        System.out.println("Bem vindo senhores a maior batalha maritima de suas vidas");
+        iniciaTabuleiro(tabuleiro, SombraDoTabuleiro);
+        System.out.println("Rodada do jogador 1");
+        System.out.println("Posicione suas peças");
+        mostraTabuleiro(SombraDoTabuleiro);
+        for (int i = 0; i < 4; i++) {
+            inicianavio(SombraDoTabuleiro);
+            mostraTabuleiro(SombraDoTabuleiro);
+        }
+        for (int i = 0; i < 20; i++) {
+            System.out.println();
+        }
+        do {
+            System.out.println("Rodada do jogador 2");
+            System.out.println("você tem "+ tentativas+" restantes");
+            mostraTabuleiro(tabuleiro);
+            Dartiro(tiro);
+
+            tentativas = (acertou(tiro, SombraDoTabuleiro, tabuleiro,tentativas));
+
+
+        } while ((tentativas > 0) && (acertos < 12));
+        if (tentativas <= 0) {
+            System.out.println("Player 1 wins");
+        } else if (acertos == 12) {
+            System.out.println("Player 2 wins");
+        }
+    }
+
+    public static void iniciaTabuleiro(int[][] tabuleiro, int[][] SombraDoTabuleiro) {
+        for (int lin = 0; lin < 7; lin++) {
+            for (int col = 0; col < 7; col++) {
+                tabuleiro[lin][col] = -1;
+                SombraDoTabuleiro[lin][col] = -1;
+
+            }
+        }
+    }
+
+    public static void mostraTabuleiro(int[][] tabuleiro) {
+        System.out.println("\t1 \t2 \t3 \t4 \t5 \t6 \t7");
+
+        for (int lin = 0; lin < 7; lin++) {
+            System.out.print((lin + 1) + "");
+            for (int col = 0; col < 7; col++) {
+                if (tabuleiro[lin][col] == -1) {
+                    System.out.print("\t" + "~"); //🌊 🔥 ⛴
+                } else if (tabuleiro[lin][col] == 0) {
+                    System.out.print("\t" + "X");
+                } else if (tabuleiro[lin][col] == 1) {
+                    System.out.print("\t" + "=");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+
+    public static void inicianavio(int[][] SombraDoTabuleiro) {
+        Scanner sc = new Scanner(System.in);
+        int coluna, linha, confnavio = 0;
+
+        do {
+            System.out.println("==================================================================");
+            System.out.println("                escolha qual opçao de navio deseja                ");
+            System.out.println("        opcão 1         opção 2         opção 3         opção 4   ");
+            System.out.println("          x                               0                       ");
+            System.out.println("          0              x 0 0            0              0 0 x    ");
+            System.out.println("          0                               x                       ");
+            System.out.println("==================================================================");
+            System.out.println("                escolha qual opçao de navio deseja                ");
+            System.out.println("        opcão 5         opção 6         opção 7         opção 8   ");
+            System.out.println("          x               x          0                        0   ");
+            System.out.println("            0           0              0                    0     ");
+            System.out.println("              0       0                  x                x       ");
+            System.out.println("==================================================================");
+
+
+            opcao = sc.nextInt();
+
+            if (opcao == 1) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            } else if (opcao == 2) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            } else if (opcao == 3) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            } else if (opcao == 4) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            } else if (opcao == 5) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            } else if (opcao == 6) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            } else if (opcao == 7) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            } else if (opcao == 8) {
+                do {
+                    System.out.println("em qual coluna deseja iniciar o navio");
+                    coluna = sc.nextInt();
+                } while ((coluna < 1) || (coluna > 7));
+                do {
+                    System.out.println("em qual linha deseja iniciar o navio");
+                    linha = sc.nextInt();
+                } while ((linha < 1) || (linha > 7));
+
+                linha = linha - 1;
+                coluna = coluna - 1;
+                confnavio = ColocaNavio(SombraDoTabuleiro, coluna, linha);
+            }
+        } while (confnavio != 1);
+    }
+
+    public static int ColocaNavio(int[][] SombraDoTabuleiro, int coluna, int linha) {
+        switch (opcao) {
+            case 1:
+                 if (linha > 4) {
+                     System.err.println("escolha a opcao 3 pois não é possivel posicionar o navio");
+                    return 0;
+                }else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha + 1][coluna] == 1 || SombraDoTabuleiro[linha + 2][coluna] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha + i][coluna] = 1;
+                    }
+                }
+                return 1;
+
+            case 2:
+                if (coluna > 4) {
+                    System.err.println("escolha a opcao 4 pois não é possivel posicionar o navio");
+                    return 0;
+                }else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha][coluna + 1] == 1 || SombraDoTabuleiro[linha][coluna + 2] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha][coluna + i] = 1;
+                    }
+                }
+                return 1;
+
+            case 3:
+                if (linha < 2) {
+                    System.err.println("escolha a opcao 1 pois não é possivel posicionar o navio");
+                    return 0;
+                }else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha - 1][coluna] == 1 || SombraDoTabuleiro[linha - 2][coluna] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha - i][coluna] = 1;
+                    }
+                }
+                return 1;
+
+            case 4:
+                if (coluna < 2) {
+                    System.err.println("escolha a opcao 2 pois não é possivel posicionar o navio");
+                    return 0;
+                }else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha][coluna - 1] == 1 || SombraDoTabuleiro[linha][coluna - 2] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha][coluna - i] = 1;
+                    }
+                }
+                return 1;
+
+            case 5:
+                if ((linha > 4) || (coluna > 4)) {
+                    System.err.println("escolha a opcao 7 pois não é possivel posicionar o navio");
+                    return 0;
+                } else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha + 1][coluna + 1] == 1 || SombraDoTabuleiro[linha + 2][coluna + 2] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha + i][coluna + i] = 1;
+                    }
+                }
+                return 1;
+
+            case 6:
+                if ((linha > 4) || (coluna < 2)) {
+                    System.err.println("escolha a opcao 8 pois não é possivel posicionar o navio");
+                    return 0;
+                } else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha + 1][coluna - 1] == 1 || SombraDoTabuleiro[linha + 2][coluna - 2] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha + i][coluna - i] = 1;
+                    }
+                }
+                return 1;
+            case 7:
+                if ((linha < 2) || (coluna < 2)) {
+                    System.err.println("escolha a opcao 5 pois não é possivel posicionar o navio");
+                    return 0;
+                }else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha - 1][coluna - 1] == 1 || SombraDoTabuleiro[linha - 2][coluna - 2] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha - i][coluna - i] = 1;
+                    }
+                }
+                return 1;
+            case 8:
+                if ((linha < 2) || (coluna > 4)) {
+                    System.err.println("escolha a opcao 6 pois não é possivel posicionar o navio");
+                    return 0;
+                } else if (SombraDoTabuleiro[linha][coluna] == 1 || SombraDoTabuleiro[linha - 1][coluna + 1] == 1 || SombraDoTabuleiro[linha - 2][coluna + 2] == 1) {
+                    System.err.println("Posição ja ocupada por um barco");
+                    return 0;
+                }else {
+                    for (int i = 0; i < 3; i++) {
+                        SombraDoTabuleiro[linha - i][coluna + i] = 1;
+                    }
+                }
+                return 1;
+        }
+        return 0;
+    }
+
+    public static void Dartiro(int[] tiro) {
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("Qual a linha que deseja dar o tiro");
+            tiro[0] = sc.nextInt();
+            tiro[0]--;
+        }while ((tiro[0] <0) || (tiro[0]>= 7));
+        do {
+
+            System.out.println("Qual a coluna que deseja dar o tiro");
+            tiro[1] = sc.nextInt();
+            tiro[1]--;
+        }while ((tiro[1] <0) || (tiro[1]>= 7));
+
+    }
+
+    public static int acertou(int[] tiro, int[][] SombraDoNavio, int[][] Tabuleiro,int tentativas) {
+        if ((Tabuleiro[tiro[0]][tiro[1]] == 0)|| (Tabuleiro[tiro[0]][tiro[1]] == 1)){
+            System.err.println("posição ja verificada por favor verifique outra posição");
+            return tentativas;
+        }
+
+        if (SombraDoNavio[tiro[0]][tiro[1]] == 1){
+            Tabuleiro[tiro[0]][tiro[1]] = 1;
+            System.out.println("Parabens voce acertou um navio");
+            acertos++;
+            return tentativas;
+        } else {
+            Tabuleiro[tiro[0]][tiro[1]] = 0;
+            System.err.println("uma pena você errou");
+            return tentativas-1;
+        }
+    }
+}
